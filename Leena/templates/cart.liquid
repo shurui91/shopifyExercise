@@ -1,10 +1,10 @@
 {% if cart.item_count > 0 %}
     <div class="container">
-		<div class="row"></div>
+        <div class="row"></div>
         <div class="my-5">
             <form action="/cart" class="row" method="POST" novalidate>
                 <div class="col-12 col-md-8">
-                    <div class="card">
+                    <div class="card shadow">
                         <div class="card-body">
                             <table>
                                 <thead>
@@ -18,13 +18,14 @@
                                         <tr>
                                             <td>
                                                 <a href="{{ item.url | within: collections.all }}">
-                                                    <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
+                                                    <img src="{{ item | img_url: 'small' }}" alt="{{ item.title | escape }}">
                                                 </a>
                                             </td>
                                             <td>
                                                 <a href="{{ item.url }}">{{ item.product.title }}</a>
-                                                {{ item.variant.title }}
-                                                <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">remove</a>
+                                                <p class="small">{{ item.variant.title }}</p>
+                                                <p href="/cart/change?line={{ forloop.index }}&amp;quantity=0">remove</p>
+                                                </p>
                                             </td>
                                             <td>{{ item.price | money }}</td>
                                             <td>
@@ -47,12 +48,14 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-4">
-                    <div class="card">
+                    <div class="card shadow">
                         <div class="card-body">
-                            <p>sub total :
-                                {{ cart.total_price | money }}</p>
-                            <button name="update" type="submit">Update</button>
-                            <button name="checkout" type="submit">Checkout</button>
+                            <p class="h3">The Total Amount is</p>
+                            <p>{{ cart.total_price | money }}</p>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary" name="update" type="submit">Update</button>
+                                <button class="btn btn-primary" name="checkout" type="submit">Checkout</button>
+                            </div>
                         </div>
                     </div>
                 </div>
